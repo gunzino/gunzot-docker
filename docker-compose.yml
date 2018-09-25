@@ -1,0 +1,40 @@
+version: '2'
+services:
+  gunzodus-laravel:
+    image: gunzot/laravel-environment
+    ports:
+    - "127.0.0.1:8080:80"
+    volumes:
+    - "./web:/var/www"
+    - "mysql_socket:/var/run/mysqld/"
+
+  mysql:
+    build:
+      context: .
+      dockerfile: mysql.Dockerfile
+    image: mysql-gunzot
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=gunzodus
+    volumes:
+      - "mysql_data:/var/lib/mysql"
+      - "mysql_socket:/var/run/mysqld/"
+      - "./scheme.sql:/root/scheme.sql"
+  redis:
+      image: redis
+
+  server:
+    image: gunzot/engine
+    ports:
+      - "127.0.0.1:7171:7171"
+      - "127.0.0.1:7172:7172"
+    volumes:
+      - "mysql_socket:/var/run/mysqld/"
+      - "./server:/server"
+    stdin_open: true
+    tty: true
+    entrypoint: echo
+    command: echo From compose
+volumes:
+  mysql_socket:
+  mysql_data:
