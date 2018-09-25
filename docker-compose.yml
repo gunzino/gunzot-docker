@@ -33,8 +33,7 @@ services:
       - "./server:/server"
     stdin_open: true
     tty: true
-    entrypoint: echo
-    command: echo From compose
+    command: sleep 999999999
 volumes:
   mysql_socket:
   mysql_data:
