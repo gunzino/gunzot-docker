@@ -5,6 +5,7 @@ You can use your own scheme.sql.
 
 To start project use: docker-compose up -d  
 
-To compile & run tfs you need to execute bash shell in server container using: docker-compose run server --entrypoint /bin/bash  
+To compile & run tfs you need to execute bash shell in server container using:  
+docker-compose run server --entrypoint /bin/bash  
 Server is located in /server folder.  
 
